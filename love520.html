@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>❤️ 表白 ❤️</title>
+    <style>
+        body {
+            background: #FFD7C4;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: "幼圆", sans-serif;
+        }
+
+        .title {
+            font: bold 30px "楷体";
+            color: #FF69B4;
+            background: #FFF0F5;
+            border: 6px groove #FF69B4;
+            padding: 10px 20px;
+            margin: 25px 0;
+        }
+
+        .message {
+            font: 22px "隶书";
+            color: #8A2BE2;
+            text-align: center;
+            width: 520px;
+            min-height: 88px; /* 保持与原Tkinter高度一致 */
+            margin: 20px 0;
+            display: none; /* 初始隐藏 */
+        }
+
+        .btn-frame {
+            display: none; /* 初始隐藏 */
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .btn {
+            font: 18px "幼圆";
+            color: white;
+            padding: 10px 20px;
+            border: 3px ridge;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        #start-btn {
+            font: 24px "幼圆";
+            background: #FF69B4;
+            padding: 15px 30px;
+            margin: 50px 0;
+        }
+
+        #confess-btn { background: #BA55D3; }
+        #again-btn { background: #FF69B4; }
+        #popup-btn { background: #FFB6C1; }
+        #music-btn { background: #20B2AA; }
+        #close-btn { 
+            background: #8A2BE2; 
+            font: 16px "幼圆";
+            margin: 10px 0;
+        }
+
+        .footer {
+            font: 14px "楷体";
+            color: #FF69B4;
+            position: fixed;
+            bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">❤️ 我有话想对你说 ❤️</h1>
+    <div class="message" id="message">请点击下方按钮表白</div>
+    <div class="btn-frame" id="btn-frame">
+        <button class="btn" id="confess-btn">点我表白</button>
+        <button class="btn" id="again-btn">再来一句</button>
+        <button class="btn" id="popup-btn">弹窗表白</button>
+        <button class="btn" id="music-btn">播放音乐</button>
+    </div>
+    <button class="btn" id="start-btn">表白开始</button>
+    <button class="btn" id="close-btn">关闭</button>
+    <div class="footer">愿你每天都被爱包围~</div>
+
+    <audio id="bgm" src="https://music.163.com/song/media/outer/url?id=1824045033.mp3" loop preload="auto"></audio> <!-- 替换为网易云音乐公开链接 -->
+
+    <script>
+        // 初始化配置
+        const messages = [
+            "我喜欢你，就像老鼠爱大米！",
+            "你是我的唯一，我的心只为你跳动。",
+            "与你相遇是我一生最美的意外。",
+            "我愿意用一生的时间，陪你走过每一个春夏秋冬。",
+            "你是我心中的女神，我能为你付出一切！",
+            "你的笑容是我每天的阳光。",
+            "遇见你，是我最美的幸运。",
+            "我想和你一起看遍世间美景。",
+            "你在，我在，便是最美的时光。",
+            "我的世界因你而精彩。",
+            "你是我心中永远的公主。",
+            "愿余生都是你。"
+        ];
+        const bgm = document.getElementById('bgm');
+
+        // 开场按钮点击事件
+        document.getElementById('start-btn').addEventListener('click', () => {
+            document.getElementById('start-btn').style.display = 'none';
+            document.getElementById('message').style.display = 'block';
+            document.getElementById('btn-frame').style.display = 'flex';
+        });
+
+        // 随机显示消息
+        function showMessage() {
+            const msgElem = document.getElementById('message');
+            msgElem.textContent = messages[Math.floor(Math.random() * messages.length)];
+        }
+
+        // 绑定按钮事件
+        document.getElementById('confess-btn').addEventListener('click', showMessage);
+        document.getElementById('again-btn').addEventListener('click', showMessage);
+        document.getElementById('popup-btn').addEventListener('click', () => {
+            alert(messages[Math.floor(Math.random() * messages.length)]);
+        });
+        document.getElementById('music-btn').addEventListener('click', () => {
+            bgm.paused ? bgm.play() : bgm.pause();
+        });
+        document.getElementById('close-btn').addEventListener('click', () => {
+            window.close();
+        });
+    </script>
+</body>
+</html>
